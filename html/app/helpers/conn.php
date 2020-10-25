@@ -28,7 +28,7 @@ class conn
         {
             try 
             {
-                self::$instance = new PDO("mysql:host=mysql-server;dbname=appweb1", "root", "secret");
+                self::$instance = new PDO("mysql:host=".getenv('HOST').";dbname=".getenv('DATABASE'), getenv('USER'), getenv('PASS'));
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return self::$instance;
             } 

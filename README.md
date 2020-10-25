@@ -20,3 +20,24 @@
 ## Verificando o status da aplicação
 1. Execute o arquivo ```./ambience.sh```
 2. Acesse a opção **2** para acessar os status dos container's.
+  
+  
+## Executando a aplicação
+### Setando as variáveis de ambiente
+O projeto foi concebido, buscando as variáveis de ambiente do arquivo ```.env``` encontrado na raiz da aplicação.  
+
+#### Criando uma nova variável de ambiente
+Use o padrão **CHAVE**=**valor**
+
+Para isso execute:
+1. Abra o arquivo ```.env```
+2. Escreva a variável no padrão CHAVE=valor
+3. Instancie a classe: ```config``` através por exemplo de um require_once: ```require_once("app/helpers/config.php");```
+4. Carregue as variáveis de ambiente por exemplo dentro do bloco: 
+```php
+    try {
+        config::getInstance()->loadFileEnv();
+    } catch(Exception $e) {
+       echo "Erro ao chamar a classe manipuladora das variáveis de ambiente do projeto: <br>" . $e->getMessage();
+    }
+```
