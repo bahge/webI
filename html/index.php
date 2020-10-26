@@ -4,34 +4,35 @@
     ini_set('display_errors',1);
     ini_set('display_startup_erros',1);
     error_reporting(E_ALL);
-
-    /* Incluindo arquivo de mensagens */
-    require_once("app/helpers/messager.php");
-
-    /* Incluindo arquivo de configurações */
-    require_once("app/helpers/config.php");
-
-    /* Incluindo arquivo da conexão com o BD */
-    require_once("app/helpers/conn.php");
-
-    /* Carregando as variáveis de ambiente do projeto */
+    /* AutoLoader para as classes */
+    include_once("./app/helpers/autoloader.php");
+    $autoload = new autoloader();
+    
     try {
+        /* Carregando as variáveis de ambiente do projeto */
         config::getInstance()->loadFileEnv();
+
     } catch(Exception $e) {
         echo "Erro ao chamar a classe manipuladora das variáveis de ambiente do projeto: <br>" . $e->getMessage();
     }
 
-    /* Requisitando a conexão */
-    try {
-        conn::getInstance()->query('SELECT * FROM user');
-    } catch(PDOException $e) {
+    /*try {
+        // Requisitando a conexão
+        $tst = conn::run("SELECT count(*) FROM users")->fetchColumn();
+        echo $tst;
+    
+    } catch(Exception $e) {
         if ($e->getMessage() == "SQLSTATE[42S02]: Base table or view not found: 1146 Table 'appweb1.users' doesn't exist"):
+            // Incluindo arquivo de configurações 
+            //require_once("app/installer/installer.php");
+            $install = new installer();
+            $createTable = $install->install();
+            echo ($createTable === true) ? "Tabela criada" : "Erro ao criar a tabela" ;
         else:
-            messager::getInstance()->setErrorFile('Ocorreu um erro na query de banco de dados', '002' ,$_SERVER['PHP_SELF'], $e->getMessage());
-            print_r(messager::getInstance()->getFormatErrorMsg());
+            messager::getInstance()->setErrorFile('Ocorreu um erro na query para o banco de dados', '001' , $_SERVER['PHP_SELF'], 'Erro ao acessar o BD');
+            print_r(messager::getInstance()->getFormatErrorMsg());die;
         endif;
        
-    }
-    
-    
+    }*/
+
 ?>

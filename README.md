@@ -41,3 +41,15 @@ Para isso execute:
        echo "Erro ao chamar a classe manipuladora das variáveis de ambiente do projeto: <br>" . $e->getMessage();
     }
 ```
+
+
+## Autoload de classes
+Foi adicionado um autoload, para facilitar os carregamentos das classes.  
+Atualmente apenas os diretórios ```app/helpers``` e ```app/installer``` estão inseridos no autoload.  
+
+
+## Usando o PDOWrapper através da classe CRUD
+Foi criado um PDOWrapper para auxiliar na manipulação do Banco de dados.  
+Através da classe CRUD, menos verboso que o PDO tradicional ele já faz a preparação e a execução dos statments.  
+O métodos disponíveis são: ```insert, read, update e delete```  
+Acessa a pasta ```app/helpers/``` e visualize o arquivo ```crud.php```

@@ -5,17 +5,10 @@
 class conn 
 {
     
-    public static $instance;
+    protected static $instance = null;
 
-    protected function __construct()
-    { 
-        //
-    }
-
-    protected function __clone() 
-    { 
-        //
-    }
+    protected function __construct() {}
+    protected function __clone() {}
 
     public function __wakeup()
     {
@@ -24,19 +17,42 @@ class conn
 
     public static function getInstance()
     {
-        if (!isset(self::$instance))
+        if (self::$instance === null)
         {
-            try 
-            {
-                self::$instance = new PDO("mysql:host=".getenv('HOST').";dbname=".getenv('DATABASE'), getenv('USER'), getenv('PASS'));
-                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                return self::$instance;
-            } 
-            catch(PDOException $e) 
-            {
-                return "Erro na conexão: " . $e->getMessage();
-            }
+            $options = array (
+                PDO::ATTR_ERRMODE               =>  PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE    =>  PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES      =>  FALSE
+            );
+
+            $strconn = 'mysql:host='.getenv('HOST').';dbname='.getenv('DATABASE').';charset=utf8';
+            self::$instance = new PDO($strconn, getenv('USER'), getenv('PASS'), $options);
         }
+        return self::$instance;
+    }
+
+    public static function __callStatic($method, $args)
+    {
+        return call_user_func_array(array(self::getInstance(), $method), $args);
+    }
+
+    public static function run($sql, $args = [])
+    {
+        if (!$args)
+        {
+             return self::getInstance()->query($sql);
+        }
+        try 
+        {
+            $stmt = self::getInstance()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        } 
+        catch (Exception $e) 
+        {
+            return "Erro:<br>" . $e->getMessage();
+        }
+        
     }
 }
 
