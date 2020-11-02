@@ -11,7 +11,8 @@ class autoloader {
 
         $directories = array(
             'app/helpers/',
-            'app/installer/'
+            'app/installer/',
+            'app/models/'
         );
        
         //for each directory

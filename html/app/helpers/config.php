@@ -22,6 +22,11 @@ class config
         throw new \Exception("Não é possível desserializar um singleton.");
     }
 
+    /**
+     * Função que verifica se a instancia de config existe e a retorna, caso contrário instancia e a retorna
+     * 
+     * @return object            
+     */
     public static function getInstance()
     {
         if (!isset(self::$instance))
@@ -36,6 +41,11 @@ class config
         }
     }
 
+    /**
+     * Função para leitura do arquivo env
+     * 
+     * @return void            
+     */
     public function loadFileEnv()
     {
         try {
@@ -51,6 +61,11 @@ class config
         
     }
 
+    /**
+     * Função que carrega as variáveis de ambiente do arquivo .env
+     * 
+     * @return void            
+     */
     private function loadFileEnvGetVars()
     {
         $file = fopen(ABS_PATH . '/.env', 'r');

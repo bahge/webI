@@ -63,13 +63,16 @@ class crud
         // Quebra os parâmetros do prepare do PDO
         if (!empty($parse)):
             parse_str($parse, $param);
+        else:
+            $param = null;
         endif;
+
         // Monta a query
         $query = "SELECT {$fields} FROM {$this->table} {$args}";
         // Executa no bloco try, capturando a mensagem de exceção
         try 
         {
-            $this->result = conn::run($query, $param)->fetchAll();
+            $this->result = conn::run($query, $param)->fetchAll();            
         } catch (Exception $e) {
             $this->result = array("Erro" => $e.getMessage());
         }        
