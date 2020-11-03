@@ -9,22 +9,13 @@ class autoloader {
     private function load($className) {
         $extension = spl_autoload_extensions();
 
-        $directories = array(
-            'app/helpers/',
-            'app/installer/',
-            'app/models/'
-        );
-       
-        //for each directory
-        foreach($directories as $directory)
+        $filename = ABS_PATH . '/' . $className . $extension;
+        $filename = str_replace('\\', '/', $filename);
+        if(file_exists($filename))
         {
-            //see if the file exsists
-            if(file_exists(ABS_PATH . '/'. $directory.$className . $extension))
-            {
-                require_once (ABS_PATH . '/'. $directory.$className . $extension);
-                return;
-            }           
-        }  
+            require_once $filename;
+            return;
+        }             
     }
 
 }

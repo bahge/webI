@@ -1,6 +1,6 @@
 <?php
+namespace app\helpers;
 
-require_once('conn.php');
 
 class crud
 {

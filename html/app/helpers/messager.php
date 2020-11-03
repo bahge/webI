@@ -1,4 +1,5 @@
 <?php
+namespace app\helpers;
 /**
  * Classe messager registra e mostra os erros quando ocorre o retorno falso de algo esperado
  */

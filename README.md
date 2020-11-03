@@ -53,3 +53,22 @@ Foi criado um PDOWrapper para auxiliar na manipulação do Banco de dados.
 Através da classe CRUD, menos verboso que o PDO tradicional ele já faz a preparação e a execução dos statments.  
 O métodos disponíveis são: ```insert, read, update e delete```  
 Acessa a pasta ```app/helpers/``` e visualize o arquivo ```crud.php```
+
+## Sistema de Rotas
+Para execução em url amigável, foi adicionado uma classe rotes, que carrega a variável ```$url```, enviando "CONTROLER/MÉTODO/PARAMETRO".  
+Essa classe, executa a limpeza, sendo indicado apenas nomes em mínusculo, com hífem e sem acentos, além de verificar a existência do método na classe.
+Por padrão, a classe ```home``` é enviada caso ocorra erro no carregamento, sendo passado o método ```index``` como método padrão para todas as controllers, para isso, a home e demais classes, devem implementar a interface **stdController**.
+
+## Sistema de renderização de VIEW
+As view são renderizadas através da classe helper **views**.  
+Para instancia-la, basta usar o exemplo:  
+```php
+    $page = new views('CONTROLLER/METODO');
+    $page->render();
+```  
+podendo ser passados **dados** na forma de array e outros arquivos de **header**, **menu** e **footer**  
+```php
+    $page = new views('CONTROLLER/METODO', ['name' => 'EXEMPLO'], ['header' => 'novoHeader']);
+    $page->render();
+```
+Para que ocorra a renderização do novo arquivo, a extensão do arquivo deve ser php e **não** **deve** **ser** **declarada** **no** **array**.

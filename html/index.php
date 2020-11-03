@@ -7,16 +7,31 @@
     /* AutoLoader para as classes */
     include_once("./app/helpers/autoloader.php");
     $autoload = new autoloader();
-    
+    // Classe que carrega as variáveis de ambiente
+    use app\helpers\config;
     try {
-        /* Carregando as variáveis de ambiente do projeto */
+        // Carregando as variáveis de ambiente do projeto
         config::getInstance()->loadFileEnv();
-
     } catch(Exception $e) {
         echo "Erro ao chamar a classe manipuladora das variáveis de ambiente do projeto: <br>" . $e->getMessage();
     }
 
-    try {
+    if (isset($_GET['url']))
+    {
+        $url = $_GET['url'];
+        $url = explode('/', $url);
+    }
+    else
+    {
+        $url = array('home');
+    }
+    use app\helpers\rotes;
+    $rotes = new rotes($url);
+
+
+    use app\models\person;
+
+    /*try {
         // Requisitando a conexão
         $tst = conn::run("SELECT count(*) FROM users")->fetchColumn();
         echo $tst;
@@ -34,11 +49,11 @@
             print_r(messager::getInstance()->getFormatErrorMsg());die;
         endif;
        
-    }
+    }*/
 
-    // $person = new person();
-    // $array = $person->listAll();
-    // foreach ($array as $obj) {
-    //     echo $obj->getId();
-    // }
+    $person = new person();
+    $array = $person->listAll();
+    foreach ($array as $obj) {
+        echo $obj->getId();
+    }
 ?>

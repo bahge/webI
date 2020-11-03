@@ -1,4 +1,5 @@
 <?php
+namespace app\helpers;
 /**
  * Classe config, modelo singleton
  */

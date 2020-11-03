@@ -1,4 +1,5 @@
 <?php
+use PDO;
 /**
  * Classe installer inicia o banco de dados de usuário
 */

@@ -1,13 +1,16 @@
 <?php
+namespace app\models;
 
-require_once(ABS_PATH . '/app/helpers/crud.php');
+use app\helpers\crud;
+use app\helpers\crudInterface;
+
 class person implements crudInterface
 {
     private $id;
     private $name;
     private $email;
     private $phone;
-    private static $entity = 'persons';
+    private static $entity = 'person';
 
     /**
      * Função que auxilia na listagem de todos objetos person retonando dentro de um array
@@ -20,7 +23,7 @@ class person implements crudInterface
         $array = $read->read(self::$entity, '', null, null);
         $persons = [];
         foreach ($array as $key) {
-            $person = new person($key['id'], $key['user'], $key['email'], null);
+            $person = new person($key['id'], $key['name'], $key['email'], null);
             array_push($persons, $person);
         }
         return $persons;
@@ -69,6 +72,11 @@ class person implements crudInterface
         $this->name = (string) $name;
         $this->email = (string) $email;
         $this->phone = (!is_null($phone)) ? $phone : '';
+    }
+
+    public function save(person $person)
+    {
+
     }
 
     /**

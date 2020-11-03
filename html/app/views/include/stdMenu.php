@@ -1,0 +1,1 @@
+<a href="<?php echo getenv("URLBASE"); ?>/home">Home</a>

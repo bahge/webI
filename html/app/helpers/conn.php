@@ -1,7 +1,10 @@
 <?php
+namespace app\helpers;
 /**
  * Classe conn, modelo singleton
  */
+
+use PDO;
 class conn 
 {
     
