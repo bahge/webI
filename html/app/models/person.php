@@ -11,6 +11,7 @@ class person implements crudInterface
     private $email;
     private $phone;
     private static $entity = 'person';
+    private $person;
 
     /**
      * Função que auxilia na listagem de todos objetos person retonando dentro de um array
@@ -23,7 +24,7 @@ class person implements crudInterface
         $array = $read->read(self::$entity, '', null, null);
         $persons = [];
         foreach ($array as $key) {
-            $person = new person($key['id'], $key['name'], $key['email'], null);
+            $person = new person($key['id'], $key['name'], $key['email'], $key['phone']);
             array_push($persons, $person);
         }
         return $persons;
@@ -31,40 +32,49 @@ class person implements crudInterface
 
     /**
      * Função que auxilia na busca por um registro indivídual retornando um objeto person
-     * 
-     * @return array            
+     *
+     * @param $id
+     * @return array
      */
     public function listById($id)
     {
+        $idPerson = (int) $id;
         $read = new crud();
-        $person = $read->read(self::$entity, 'WHERE id=:id', 'id={$id}', null);
-        var_dump($person);
+        $person = $read->read(self::$entity, 'WHERE id=:id', 'id='. $idPerson, null);
+        return $person[0];
     }
 
     /**
      * Função que auxilia na edição de um registro
-     * 
-     * @return boolean            
+     *
+     * @param $id
+     * @return boolean
      */
     public function editById($id)
     {
-
+        $save = new crud();
+        return $save->update(self::$entity, ['name' => $this->person->getName(), 'email' => $this->person->getEmail(), 'phone' => $this->person->getPhone()], ['id' => $id]);
     }
 
     /**
      * Função que auxilia na remoção de um registro
-     * 
-     * @return boolean            
+     *
+     * @param $id
+     * @return boolean
      */
     public function deleteById($id)
     {
-
+        $delete = new crud();
+        return $delete->delete(self::$entity, ['id' => $id]);
     }
 
     /**
      * Função quando instanciada constroi uma nova person
-     * 
-     * @return void           
+     *
+     * @param null $id
+     * @param null $name
+     * @param null $email
+     * @param null $phone
      */
     public function __construct($id = null, $name = null, $email = null, $phone = null)
     {
@@ -74,9 +84,21 @@ class person implements crudInterface
         $this->phone = (!is_null($phone)) ? $phone : '';
     }
 
+    /**
+     * Função que auxilia na inserção de um registro
+     *
+     * @param person $person
+     * @return mixed
+     */
     public function save(person $person)
     {
-
+        $create = new crud();
+        if (is_null($this->getId())){
+            return $create->insert(self::$entity, ['name' => $person->getName(), 'email' => $person->getEmail(), 'phone' => $person->getPhone()]);
+        } else {
+            $this->person = $person;
+            return $this->editById($person->getId());
+        }
     }
 
     /**

@@ -16,6 +16,7 @@
         echo "Erro ao chamar a classe manipuladora das variáveis de ambiente do projeto: <br>" . $e->getMessage();
     }
 
+    // Carregando as rotas
     if (isset($_GET['url']))
     {
         $url = $_GET['url'];
@@ -28,8 +29,6 @@
     use app\helpers\rotes;
     $rotes = new rotes($url);
 
-
-    use app\models\person;
 
     /*try {
         // Requisitando a conexão
@@ -51,9 +50,4 @@
        
     }*/
 
-    $person = new person();
-    $array = $person->listAll();
-    foreach ($array as $obj) {
-        echo $obj->getId();
-    }
 ?>

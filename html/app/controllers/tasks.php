@@ -2,11 +2,12 @@
 namespace app\controllers;
 
 use app\helpers\views;
-class home implements stdController
+class tasks implements stdController
 {
+
     public function index()
     {
-        $page = new views('home/index');
+        $page = new views('tasks/index');
         $page->render();
     }
 }

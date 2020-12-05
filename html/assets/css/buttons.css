@@ -1,0 +1,39 @@
+.btn
+{
+    padding: 4px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.btn.btn-primary
+{
+    background-color: #799AED;
+    color: white;
+    transition: 0.6s;
+}
+
+.btn.btn-primary:hover
+{
+    color: black;
+    background-color: #799AED44;
+    border-color: #799AED;
+}
+
+.btn.btn-danger
+{
+    background-color: #d07d78;
+    color: white;
+    transition: 0.6s;
+}
+
+.btn.btn-danger:hover
+{
+    color: black;
+    background-color: #d07d7844;
+    border-color: #d07d78;
+}
+
+.bg-danger{
+    background-color: #d07d78 !important;
+}
