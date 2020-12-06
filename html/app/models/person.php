@@ -52,8 +52,8 @@ class person implements crudInterface
      */
     public function editById($id)
     {
-        $save = new crud();
-        return $save->update(self::$entity, ['name' => $this->person->getName(), 'email' => $this->person->getEmail(), 'phone' => $this->person->getPhone()], ['id' => $id]);
+        $edit = new crud();
+        return $edit->update(self::$entity, ['name' => $this->person->getName(), 'email' => $this->person->getEmail(), 'phone' => $this->person->getPhone()], ['id' => $id]);
     }
 
     /**
@@ -65,7 +65,12 @@ class person implements crudInterface
     public function deleteById($id)
     {
         $delete = new crud();
-        return $delete->delete(self::$entity, ['id' => $id]);
+        $useInUser = $delete->read('users', 'WHERE personId=:id', 'id=' . $id, array('login'));
+        if (isset($useInUser[0]['login'])){
+            return array('Erro' => 'A pessoa está vinculada ao usuário: ' . $useInUser[0]['login'] . ', remova primeiro o usuário');
+        } else {
+            return $delete->delete(self::$entity, ['id' => $id]);
+        }
     }
 
     /**

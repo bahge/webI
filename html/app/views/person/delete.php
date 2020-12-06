@@ -25,7 +25,7 @@ extract($this->data);
         if (confirm("Tem certeza que deseja apagar o registro?")) {
             sendForm('sendPerson', '<?= getenv('URLBASE');?>/person/deletePerson');
         } else {
-            alert('Ufa!!')
+            alert('🆄🅵🅰...!!')
         }
     }
 </script>

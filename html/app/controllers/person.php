@@ -31,8 +31,12 @@ class person implements stdController
     {
         $person = new models\person();
         $array = $person->listById($id);
-        $page = new views('person/update', $array);
-        $page->render();
+        if (!is_null($array)){
+            $page = new views('person/update', $array);
+            $page->render();
+        } else {
+            echo '🅴🆁🆁🅾: Pessoa não encontrada';exit;
+        }
     }
 
     /**
@@ -43,8 +47,12 @@ class person implements stdController
     {
         $person = new models\person();
         $array = $person->listById($id);
-        $page = new views('person/delete', $array);
-        $page->render();
+        if (!is_null($array)){
+            $page = new views('person/delete', $array);
+            $page->render();
+        } else {
+            echo '🅴🆁🆁🅾: Pessoa não encontrada';exit;
+        }
     }
 
     /**
@@ -61,9 +69,9 @@ class person implements stdController
             $save = $person->save($person);
 
             if ($save == true) {
-                echo 'Registro inserido com sucesso.';
+                echo '🆂🆄🅲🅴🆂🆂🅾: Registro inserido com sucesso.';
             } else {
-                echo $save['Erro'];
+                echo '🅴🆁🆁🅾: ' . $save['Erro'];
             }
         }
     }
@@ -83,9 +91,9 @@ class person implements stdController
             $save = $person->save($person);
 
             if ($save == true) {
-                echo 'Registro atualizado com sucesso.';
+                echo '🆂🆄🅲🅴🆂🆂🅾: Registro atualizado com sucesso.';
             } else {
-                echo $save['Erro'];
+                echo '🅴🆁🆁🅾: ' . $save['Erro'];
             }
         }
     }
@@ -99,10 +107,10 @@ class person implements stdController
             $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
             $person = new models\person();
             $delete = $person->deleteById($id);
-            if ($delete == true) {
-                echo 'Registro removido com sucesso.';
+            if ($delete === true) {
+                echo '🆂🆄🅲🅴🆂🆂🅾: Registro removido com sucesso.';
             } else {
-                echo $delete['Erro'];
+                echo '🅴🆁🆁🅾: ' . $delete['Erro'];
             }
         }
     }

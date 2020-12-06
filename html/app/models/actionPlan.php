@@ -16,14 +16,7 @@ class actionPlan implements crudInterface
      */
     public static function listAll()
     {
-        $read = new crud();
-        $array = $read->read(self::$entity, '', null, null);
-        $actionPlans = [];
-        foreach ($array as $key) {
-            $actionPlan = new actionPlan($key['id'], $key['name'], $key['description']);
-            array_push($actionPlans, $actionPlans);
-        }
-        return $actionPlans;
+        // Todo something
     }
 
     /**

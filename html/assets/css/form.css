@@ -4,7 +4,8 @@ form
 }
 
 input[type=text],
-input[type=email]
+input[type=email],
+input[type=password]
 {
     width: 100%;
     padding: 10px 16px;
@@ -13,9 +14,18 @@ input[type=email]
     border: none;
     border-bottom: 1px solid #799AED;
 }
+select
+{
+    width: 100%;
+    padding: 10px 16px;
+    margin: 4px 0;
+    border: 1px solid #799AED;
+    background-color: #799AED11;
+}
 
 input[type=text]:focus,
-input[type=email]:focus
+input[type=email]:focus,
+input[type=password]:focus
 {
     border-bottom: 1px solid #EDCC79;
 }
@@ -27,9 +37,18 @@ input[type=button]
     width: 100%;
 }
 
-form > label
+form > label,
+form > .select > label
 {
     font-size: 0.7rem;
     font-weight: bold;
     color: #799AED;
+}
+
+.select
+{
+    margin: 10px 0px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0px;
 }

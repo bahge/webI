@@ -120,7 +120,14 @@ class rotes
             }
             else
             {
-                $classLoad->{$this->method}();
+                $r = new \ReflectionMethod ($classLoad, $this->method );
+                $p = $r->getNumberOfRequiredParameters();
+                if ($p === 0 ) {
+                    $classLoad->{$this->method}();
+                } else {
+                    echo  "A classe <b>{$this->url[0]}</b>, existe, porém apresenta erro.<br> Erro ao carregar o método que <strong>exige parâmetro</strong></strong>: <br> {$this->method}";
+                }
+
             }
         else:
             echo "A classe <b>{$this->url[0]}</b>, existe, porém apresenta erro.<br> Erro ao carregar o método: <br> {$this->method}";
