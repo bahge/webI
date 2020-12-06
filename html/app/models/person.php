@@ -60,7 +60,7 @@ class person implements crudInterface
      * Função que auxilia na remoção de um registro
      *
      * @param $id
-     * @return boolean
+     * @return mixed | boolean
      */
     public function deleteById($id)
     {

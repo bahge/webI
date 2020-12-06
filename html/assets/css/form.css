@@ -45,6 +45,16 @@ form > .select > label
     color: #799AED;
 }
 
+textarea {
+    width: 100%;
+    height: 250px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #799AED;
+    background-color: #799AED22;
+    font-size: 12px;
+}
+
 .select
 {
     margin: 10px 0px;
