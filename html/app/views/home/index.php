@@ -16,5 +16,10 @@
             </ul>
         Mais informações podem ser encontradas no <a href="https://github.com/bahge/webI">github</a> do projeto.
         </p>
+        <?php
+        if (isset($this->data['OPA'])){
+            echo '<h1 style="color: red">' . $this->data['OPA'] . '</h1><p>Clique "<a href="'.getenv('URLBASE').'/home/start">aqui</a>" e inicie a migration do Banco de dados!</p>';
+        }
+        ?>
     </div>
 </div><!-- End row -->

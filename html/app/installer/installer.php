@@ -1,4 +1,7 @@
 <?php
+
+namespace app\installer;
+
 use PDO;
 /**
  * Classe installer inicia o banco de dados de usuário
@@ -85,21 +88,13 @@ TASKS;
 STATE;
 
         $queries = [$createPersonQuery, $createUserQuery, $createActionPlanQuery, $createSectorQuery, $createTasksQuery, $createStateQuery];
-
         $this->result = [];
-
-        foreach ($queries as $query) 
+        foreach ($queries as $query)
         {
             $p_sql = $db->prepare($query);
-
             array_push($this->result,$p_sql->execute());
         }
-
         return $this->result;
-    }
-
-    public function createFirstUser(){
-
     }
 }
 ?>
