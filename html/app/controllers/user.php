@@ -21,7 +21,7 @@ class user implements stdController
     public function create()
     {
         $person = new crud();
-        $array['persons'] = $person->read('person', '', '', array('id', 'name'));
+        $array['persons'] = $person->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
 
         $page = new views('user/create', $array);
         $page->render();
@@ -34,7 +34,7 @@ class user implements stdController
     public function update($id)
     {
         $person = new crud();
-        $array['persons'] = $person->read('person', '', '', array('id', 'name'));
+        $array['persons'] = $person->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
         $user = new models\user();
         $array['user'] = $user->listById($id);
         if (!is_null($array['user'])){
@@ -52,7 +52,7 @@ class user implements stdController
     public function delete($id)
     {
         $person = new crud();
-        $array['persons'] = $person->read('person', '', '', array('id', 'name'));
+        $array['persons'] = $person->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
         $user = new models\user();
         $array['user'] = $user->listById($id);
         if (!is_null($array['user'])){

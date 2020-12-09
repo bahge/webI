@@ -65,11 +65,16 @@ class person implements crudInterface
     public function deleteById($id)
     {
         $delete = new crud();
-        $useInUser = $delete->read('users', 'WHERE personId=:id', 'id=' . $id, array('login'));
+        $useInUser = $delete->read(getenv('TBL_USER'), 'WHERE personId=:id', 'id=' . $id, array('login'));
+        $useInTask = $delete->read(getenv('TBL_TASKS'), 'WHERE who_pa=:id', 'id=' . $id, array('what_pa'));
         if (isset($useInUser[0]['login'])){
             return array('Erro' => 'A pessoa está vinculada ao usuário: ' . $useInUser[0]['login'] . ', remova primeiro o usuário');
         } else {
-            return $delete->delete(self::$entity, ['id' => $id]);
+            if (isset($useInTask[0]['what_pa'])){
+                return array('Erro' => 'A pessoa está vinculada a tarefe: ' . $useInTask[0]['what_pa'] . ', remova primeiro a tarefa');
+            } else {
+                return $delete->delete(self::$entity, ['id' => $id]);
+            }
         }
     }
 

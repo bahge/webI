@@ -116,7 +116,6 @@ class user implements crudInterface
             return $this->editById($user->getId());
         }
     }
-
     /**
      * @return mixed|null
      */

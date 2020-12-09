@@ -65,7 +65,12 @@ class actionPlan implements crudInterface
     public function deleteById($id)
     {
         $delete = new crud();
-        return $delete->delete( self::$entity, array( 'id' => $id ) );
+        $sectorInUse = $delete->read(getenv('TBL_SECTOR'), 'WHERE ap=:id', 'id=' . $id, array('name'));
+        if (isset($sectorInUse[0]['name'])){
+            return array('Erro' => 'A plano de ação está vinculado ao setor: ' . $sectorInUse[0]['name'] . ', remova primeiro o setor');
+        } else {
+            return $delete->delete(self::$entity, ['id' => $id]);
+        }
     }
 
     /**

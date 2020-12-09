@@ -116,6 +116,6 @@ then
 	echo "Obrigado, encerrando aplicação"
 	exit 0
 else
-	menu
 	echo "Opção inválida"
+	menu
 fi
