@@ -52,9 +52,13 @@ ul.breadcrumb li a:hover {
 }
 
 .footerbar {
+    position: fixed;
+    margin-top: 100px;
     border-top: 1px solid #799AED;
     padding: 2px 10px;
     width: 100%;
+    bottom: 0px;
+    background-color: #ffffffaa;
 }
 .footerbar p {
     padding: 0px;
