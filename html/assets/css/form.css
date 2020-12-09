@@ -57,6 +57,9 @@ textarea {
     font-size: 12px;
 }
 
+textarea.small {
+    height: 80px;
+}
 .select
 {
     margin: 10px 0px;

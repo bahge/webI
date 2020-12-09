@@ -67,8 +67,8 @@ class sector implements crudInterface
     public function deleteById($id)
     {
         $delete = new crud();
-        $taskInUse = $delete->read(getenv('TBL_TASKS'), 'WHERE sector=:id', 'id=' . $id, array('name'));
-        if (isset($taskInUse[0]['name'])){
+        $taskInUse = $delete->read(getenv('TBL_TASKS'), 'WHERE sector=:id', 'id=' . $id, array('what_pa'));
+        if (isset($taskInUse[0]['what_pa'])){
             return array('Erro' => 'O setor está vinculado a tarefa: ' . $taskInUse[0]['name'] . ', remova primeiro a tarefa');
         } else {
             return $delete->delete(self::$entity, ['id' => $id]);

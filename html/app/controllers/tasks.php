@@ -12,11 +12,8 @@ class tasks implements stdController
     public function index()
     {
         $read = new crud();
-        $array['states'] = $read->read(getenv('TBL_STATE'), '', '', array('id', 'description'));
-        $array['sectors'] = $read->read(getenv('TBL_SECTOR'), '', '', array('id', 'name'));
-        $array['persons'] = $read->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
-
-        $page = new views('tasks/index');
+        $array['tasks'] = $read->read(getenv('TBL_TASKS'), '', '', array('id', 'what_pa', 'when_pa'));
+        $page = new views('tasks/index', $array);
         $page->render();
     }
 
@@ -43,11 +40,12 @@ class tasks implements stdController
         $read = new crud();
         $array['states'] = $read->read(getenv('TBL_STATE'), '', '', array('id', 'description'));
         $array['sectors'] = $read->read(getenv('TBL_SECTOR'), '', '', array('id', 'name'));
+        $array['persons'] = $read->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
 
         $task = new models\tasks();
         $array['task'] = $task->listById($id);
         if (!is_null($array['task'])){
-            $page = new views('task/update', $array);
+            $page = new views('tasks/update', $array);
             $page->render();
         } else {
             echo '🅴🆁🆁🅾: Tarefa não encontrada';exit;
@@ -63,11 +61,12 @@ class tasks implements stdController
         $read = new crud();
         $array['states'] = $read->read(getenv('TBL_STATE'), '', '', array('id', 'description'));
         $array['sectors'] = $read->read(getenv('TBL_SECTOR'), '', '', array('id', 'name'));
+        $array['persons'] = $read->read(getenv('TBL_PERSON'), '', '', array('id', 'name'));
 
         $task = new models\tasks();
         $array['task'] = $task->listById($id);
         if (!is_null($array['task'])){
-            $page = new views('task/delete', $array);
+            $page = new views('tasks/delete', $array);
             $page->render();
         } else {
             echo '🅴🆁🆁🅾: Tarefa não encontrada';exit;
